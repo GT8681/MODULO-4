@@ -105,7 +105,7 @@ ul {
 
 .playerControls a:hover {
   filter: brightness(80%);
-  color: #282828 !important;
+  color: #49741246 !important;
 }
 
 .progress {
@@ -148,7 +148,7 @@ ul {
 }
 
 .mainPage p a:hover {
-  color: rgb(138, 138, 138);
+  color: rgb(133, 17, 65);
 }
 
 .imgLinks a:hover {
@@ -216,19 +216,16 @@ ul {
 }
 
 .album-title {
-  color: white;
+  color: rgb(179, 26, 26);
   font-weight: bold;
   font-size: x-large;
   margin-bottom: 0;
 }
 
 .artist-name {
-  color: white;
+  color: rgb(7, 104, 12);
 }
 
 .mainPage img {
   width: 200px;
-}
-.ciccio{
-display: contents;
 }

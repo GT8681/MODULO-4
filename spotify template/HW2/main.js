@@ -32,6 +32,9 @@ const generateAlbum = (data) => {
     const title = document.createElement('h2')
     title.innerText = data.title_short
 
+    const nameArtist = document.createElement('p');
+    nameArtist.innerText = data.artist.name
+
    
     const albumImg = document.createElement('img');
     albumImg.setAttribute('class', 'w-100');
@@ -43,14 +46,22 @@ const generateAlbum = (data) => {
     const duration = document.createElement('p');
     duration.innerText = data.duration;
 
-    albumContainer.append(title,duration1, duration, albumImg);
+    albumContainer.append(title,nameArtist,duration1, duration, albumImg);
     eminemSection.appendChild(albumContainer);
 }
-faSearch1.addEventListener('click', async () =>{
+eminem.addEventListener('click', async () =>{
     getSound()
           .then(results =>{
               results.data.forEach(result=> {
                 generateAlbum(result)
               });
           })
+
 })
+
+
+
+function pulisciSchermata() {
+    eminemSection.innerText = "";
+    
+}
