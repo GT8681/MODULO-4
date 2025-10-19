@@ -229,3 +229,20 @@ ul {
 .mainPage img {
   width: 200px;
 }
+.cards{
+
+  background-color: beige;
+  color: black;
+}
+.wrapper{
+   display: flex;
+  flex-wrap: wrap;
+}
+.album-card-container{
+  background-color: aqua;
+  border-radius: 10px;
+  color: black;
+}
+.album-card-img{
+   border-radius: 10px;
+}

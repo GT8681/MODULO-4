@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <script src="https://kit.fontawesome.com/1205482781.js"></script>
   <!-- Bootstrap CSS -->
- 
+
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -47,8 +47,7 @@
                       <input type="text" class="form-control mb-2" id="searchField" placeholder="Search"
                         aria-label="Search" aria-describedby="basic-addon2" />
                       <div class="input-group-append" style="margin-bottom: 4%">
-                        <button class="btn btn-outline-secondary btn-sm" type="button" id="button-search"
-                          >
+                        <button class="btn btn-outline-secondary btn-sm" type="button" id="button-search">
                           GO
                         </button>
                       </div>
@@ -80,62 +79,35 @@
             <a href="#">DISCOVER</a>
           </div>
         </div>
-        <div class="row">
+        <div class="row d-none">
           <div class="col-10">
-            <div id="searchResults" style="display: none">
-              <h2>Search Results</h2>
-              <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3"></div>
+            <div >
+              <h2>Risultati Ricerca</h2>
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3" id="searchResults"></div>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-10">
-            <div>
-              <button onclick="pulisciSchermata()" class="fa-search1">CLICCAMI per pulire pagina</button>
-           </div>
-          
-           
-            <div id="eminem" >
-
-              <h2>Eminem</h2>
+      
+        <div class="row gap-3 mt-5 eminem-row">
+          <div class="col">
             
-             
-             
-              <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks w-100" id="eminemSection">
+              <h2>EMINEM</h2>
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 py-3 eminm-results">
                
+              </div>
+            </div>
+          </div>
+
+          <div class="row gap-3 mt-5 metallica-row">
+            <div class="col">
               
-              </div>
-             
-            </div>
-           
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-10">
-            <div id="metallica">
-              <h2>Metallica</h2>
-              <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3" id="metallicaSection">
+              <h2>METALLICA</h2>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4  py-3 metallica-results">
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-10">
-            <div id="queen">
-              <h2>Queen</h2>
-              <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3" id="queenSection">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-10">
-            <div id="found" class="d-none">
-              <h2>Search results</h2>
-              <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3" id="searchSection">
-              </div>
-            </div>
-          </div>
+
+
         </div>
       </div>
     </div>
@@ -188,7 +160,7 @@
     integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
     crossorigin="anonymous"></script>
 
-  
+
 
 </body>
 

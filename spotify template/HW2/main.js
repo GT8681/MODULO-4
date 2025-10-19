@@ -1,67 +1,83 @@
-
-//fetch('https://striveschool-api.herokuapp.com/api/deezer/search?q=eminem')
-//.then(response => response.json())
-//.then(data => console.log(data))
-//.catch(error => console.error('Errore:', error));
-
-const buttonGo = document.getElementById('button-search')
-const eminemSection = document.getElementById('eminemSection');
-const eminem = document.getElementById('eminem');
-const faSearch1 = document.querySelector('fa-search1');
+const BASE_ENPOINT = ' https://striveschool-api.herokuapp.com/api/deezer/search?q='
 
 
-const getSound = async () => {
+
+const eminemResultsContainer = document.querySelector('.eminm-results')
+const metallicaResultsContainer = document.querySelector('.metallica-results')
+const inputSearch = document.getElementById('searchField')
+const inputSearchButton= document.getElementById('button-search')
+const generalSearchResultsContainer = document.getElementById('searchResults')
+const eminemRow =document.querySelector('.eminem-row')
+const metallicaRow = document.querySelector('.metallica-row')
+
+const getAlbums = async (albumName) =>{
     try {
-        const response = await fetch('https://striveschool-api.herokuapp.com/api/deezer/search?q=eminem');
-       return await response.json();
-       
+        const response = await fetch(`${BASE_ENPOINT}${albumName}`)
+        return await response.json();
+        
     } catch (error) {
-        console.timeLog(error.message);
-
+        console.log(error.messagge);
     }
 }
 
-getSound()
-.then(res => console.log(res))
+const generateAlbumCard = (album,container) =>{
 
-const generateAlbum = (data) => {
+    const wrapper = document.createElement('div')
+    wrapper.setAttribute('class','mb-4 col-12 col-md-6 col-lg-4' )
 
-    const albumContainer = document.createElement('div');
-    albumContainer.setAttribute('class', 'col-12 col-md-6 col-lg-4');
+    const card = document.createElement('div')
+    card.setAttribute('class', 'album-card-container p-3')
 
-    const title = document.createElement('h2')
-    title.innerText = data.title_short
+    const img = document.createElement('img')
+    img.setAttribute('class','album-card-img w-100  objetct-fit-cover mb-3')
+    img.src = album.album.cover
 
-    const nameArtist = document.createElement('p');
-    nameArtist.innerText = data.artist.name
+    const albumTitle = document.createElement('h3')
+    albumTitle.innerText = album.artist.name 
 
-   
-    const albumImg = document.createElement('img');
-    albumImg.setAttribute('class', 'w-100');
-    albumImg.src = data.album.cover
+    const  songTitle = document.createElement('p')
+    songTitle.setAttribute('class','album-card-song-title')
+    songTitle.innerText = album.title
 
-    const duration1 = document.createElement('p');
-    duration1.innerText = "DURATA :"
+    card.append(img,albumTitle,songTitle)
+    wrapper.appendChild(card)
+    container.appendChild(wrapper)
 
-    const duration = document.createElement('p');
-    duration.innerText = data.duration;
 
-    albumContainer.append(title,nameArtist,duration1, duration, albumImg);
-    eminemSection.appendChild(albumContainer);
+
 }
-eminem.addEventListener('click', async () =>{
-    getSound()
-          .then(results =>{
-              results.data.forEach(result=> {
-                generateAlbum(result)
-              });
-          })
+
+const initinArtist = ['eminem','metallica']
+initinArtist.forEach(artist =>{
+
+    getAlbums(artist)
+.then(res => res.data)
+.then(albums => {
+    const container = artist==='eminem' ? eminemResultsContainer : metallicaResultsContainer
+        albums.slice(0,8).forEach(album => generateAlbumCard(album,container))
+            
+});
+
 
 })
 
+const cleanInitialAlbumsDara = () => {
+    eminemResultsContainer.innerHTML = ''
+    metallicaResultsContainer.innerHTML = ''
+    generalSearchResultsContainer.parentElement.parentElement.parentElement.classList.remove('d-none')
+    eminemRow.classList.add('d-none')
+    metallicaRow.classList.add('d-none')
 
-
-function pulisciSchermata() {
-    eminemSection.innerText = "";
-    
 }
+
+inputSearchButton.addEventListener('click', async () =>{
+    const inputValue = inputSearch.value
+    cleanInitialAlbumsDara()
+    const albumData = await getAlbums(inputValue)
+    generalSearchResultsContainer.innerHTML = ""
+    albumData.data.slice(0,8).forEach(album =>{
+
+        generateAlbumCard(album,generalSearchResultsContainer)
+    })
+    
+})
