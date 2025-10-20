@@ -11,6 +11,7 @@ const getAlbums = async () => {
         const data = await response.json();
         console.log(data);
         const gallery = document.getElementById('gallery');
+        
         data.photos.forEach(photo => {
             const img = document.createElement('img');
             img.src = photo.src.medium;
@@ -26,10 +27,10 @@ const getAlbums = async () => {
 
 }
         
-gallery.innertHTML = '';
+
 //al click di un bottone mi carca nuove foto
 document.getElementById('loadMoreBtn').addEventListener('click', async () =>{
- 
+    gallery.innerText = '';
     getAlbums()
 
 });
