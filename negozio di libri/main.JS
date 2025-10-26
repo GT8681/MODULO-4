@@ -4,7 +4,8 @@ const cardButton = document.querySelector('.card-button');
 const cardContent = document.querySelector('.cart-dialog-content');
 const dialogBtnClose = document.querySelector('.dialog-btn-close');
 const bookItemCount = document.querySelector('.book-item-count');
-const totalPriceContainer = document.querySelector('.totalPrice')
+const totalPriceContainer = document.querySelector('.totalPrice');
+const clearBtn = document.querySelector('.clearBtn');
 
 let arrayBooks = [];
 
@@ -162,6 +163,15 @@ const addBooks = (book) => {
 }
 cardButton.addEventListener('click', showCart);
 dialogBtnClose.addEventListener('click', hideCart);
+
+clearBtn.addEventListener('click', () =>{
+    arrayBooks = [];
+    updateCountBook();
+    cardContent.innerHTML = "";
+    totalPriceContainer.innerText = 'TOTALE PREZZO euro 0.00';
+
+})
+
 
 
 getBooks()
