@@ -1,0 +1,12 @@
+
+.containerCategory{
+    color: aquamarine;
+    font-weight: bold;
+    font-size: 20px;
+}
+.containerPrice{
+    padding-top: 15px;
+    color: orange;
+    font-weight: bold;
+    font-size: 20px;
+}

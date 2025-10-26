@@ -1,0 +1,162 @@
+const cardContainer = document.querySelector('.card-container');
+const cardDialog = document.querySelector('.cart-dialog');
+const cardButton = document.querySelector('.card-button');
+const cardContent = document.querySelector('.cart-dialog-content');
+const dialogBtnClose = document.querySelector('.dialog-btn-close');
+const bookItemCount = document.querySelector('.book-item-count');
+
+let arrayBooks = [];
+
+
+const updateCountBook = () => {
+    bookItemCount.innerText = arrayBooks.length;
+}
+
+
+const showCart = () => {
+    cardContent.innerHTML = '';
+    cardDialog.showModal();
+    mapCardBooks();
+}
+
+
+const hideCart = () => {
+    cardDialog.close();
+}
+
+
+const deleteItemFromBook = (book) => {
+
+    let filterBook = arrayBooks.filter(singleBook => singleBook.title.toLowerCase() !== book.title.toLowerCase());
+    console.log(filterBook);
+    arrayBooks = [...filterBook];
+    updateCountBook();
+    cardContent.innerHTML = '';
+    arrayBooks.map(book => generateBookItemCount(book))
+}
+
+
+const generateBookItemCount = (book) => {
+
+    const conteinerBook = document.createElement('div');
+    conteinerBook.setAttribute('class', 'd-flex flex-column  gap-3');
+
+    const bookTitle = document.createElement('p');
+    bookTitle.innerText = book.title;
+
+    const imgBook = document.createElement('img');
+    imgBook.setAttribute('class', 'card-img-top object-fit-cover w-25');
+    imgBook.src = book.img;
+
+    const bookPrice = document.createElement('p');
+    bookPrice.innerText = book.price;
+
+    const deleteBookBtn = document.createElement('button');
+    deleteBookBtn.setAttribute('class', 'btn btn-danger w-25 mb-4');
+    deleteBookBtn.innerText = 'CANCELLA BOOK';
+
+    deleteBookBtn.addEventListener('click', () => {
+        deleteItemFromBook(book);
+
+    });
+
+
+    conteinerBook.append(bookTitle, imgBook, bookPrice, deleteBookBtn);
+    cardContent.appendChild(conteinerBook);
+};
+
+
+
+
+
+const mapCardBooks = () => {
+    if (arrayBooks.length === 0) {
+        return
+    }
+    arrayBooks.map((book) => {
+
+        generateBookItemCount(book);
+
+
+    })
+}
+
+
+
+
+const getBooks = async () => {
+    try {
+        const response = await fetch('https://striveschool-api.herokuapp.com/books');
+        const books = await response.json();
+        return books;
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+const generateBooks = async (book) => {
+    const wrapper = document.createElement('div');
+    wrapper.setAttribute('class','col-lg-10 col-md- w-25');
+
+    const container = document.createElement('div');
+    container.setAttribute('class', 'card col-lg-10 col-md-6 m-3 p-3 ');
+
+    const title = document.createElement('h3');
+    title.innerText = book.title;
+
+    const img = document.createElement('img');
+    img.setAttribute('class', 'card-img-top object-fit-cover');
+    img.src = book.img;
+
+    const containerPrice = document.createElement('div');
+    containerPrice.setAttribute('class', 'containerPrice d-flex  align-items-center gap-3');
+
+    const price = document.createElement('p');
+    price.innerText = book.price;
+
+    const pPrice = document.createElement('p');
+    pPrice.innerText = 'PRICE :';
+
+    const containerCategory = document.createElement('div');
+    containerCategory.setAttribute('class', 'containerCategory d-flex  align-items-center gap-3');
+
+    const pCategory = document.createElement('p');
+    pCategory.innerText = 'CATEGORY :';
+
+    const category = document.createElement('p');
+    category.innerText = book.category;
+
+    const addButton = document.createElement('button');
+    addButton.setAttribute('class', 'btn btn-primary');
+    addButton.innerText = 'AGGIUNGI AL CARRELLO';
+
+
+    addButton.addEventListener('click', () => {
+        addBooks(book);
+    });
+
+
+
+    container.append(title, img, containerPrice, pPrice, price, containerCategory, pCategory, category, addButton);
+    containerPrice.append(pPrice, price);
+    containerCategory.append(pCategory, category);
+    wrapper.append(container,);
+    cardContainer.appendChild(wrapper);
+
+}
+
+const addBooks = (book) => {
+    arrayBooks.push(book);
+    updateCountBook();
+    console.log(arrayBooks);
+}
+cardButton.addEventListener('click', showCart);
+dialogBtnClose.addEventListener('click', hideCart);
+
+
+getBooks()
+    .then(res => res.map(book => generateBooks(book)))
+
+
+
+

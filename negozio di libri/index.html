@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Negoziodi Libri</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="./staly.css">
+</head>
+
+<body>
+    <h1 class="text-center pt-3 text-info">NEGOZIO DI LIBRI</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-center my-4 gap-3">
+                    <button class="btn btn-info">CERCA LIBRO </button>
+                    <input type="text" id="searchInput" class="form-control w-25 text-center"
+                        placeholder="SCRIVI UN TITOLO A PIACERE...." />
+                    <button type="button" class="btn btn-primary position-relative card-button">
+                        CARRELLO
+                        <span
+                            class="position-absolute book-item-count top-0 start-100 translate-middle badge rounded-pill bg-danger btn-badge">
+                            0
+                        </span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-12 col-md-6">
+                <div class="card-container d-flex flex-wrap justify-content-center gap-3 w-100 col-lg-12 col-md-6"></div>
+            </div>
+        </div>
+    </div>
+
+    <dialog class="cart-dialog" style = "max-width: 700px;">
+        <div class="cart-dialog-content d-flex flex-wrap" > </div>
+            <button class="btn btn-danger dialog-btn-close">CLOSE</button>
+       
+    </dialog>
+
+
+
+    <script src="./main.JS"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+
+
+</html>
