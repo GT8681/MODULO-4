@@ -4,6 +4,7 @@ const cardButton = document.querySelector('.card-button');
 const cardContent = document.querySelector('.cart-dialog-content');
 const dialogBtnClose = document.querySelector('.dialog-btn-close');
 const bookItemCount = document.querySelector('.book-item-count');
+const totalPriceContainer = document.querySelector('.totalPrice')
 
 let arrayBooks = [];
 
@@ -24,6 +25,11 @@ const hideCart = () => {
     cardDialog.close();
 }
 
+const updateTotalPrice = () =>{
+    totalPrice = arrayBooks.reduce((sum,book)=> sum + parseFloat(book.price),0);
+    totalPriceContainer.innerText = `Totale prezzo Euro ${totalPrice.toFixed(2)}`
+}
+
 
 const deleteItemFromBook = (book) => {
 
@@ -31,6 +37,7 @@ const deleteItemFromBook = (book) => {
     console.log(filterBook);
     arrayBooks = [...filterBook];
     updateCountBook();
+    updateTotalPrice();
     cardContent.innerHTML = '';
     arrayBooks.map(book => generateBookItemCount(book))
 }
@@ -54,6 +61,8 @@ const generateBookItemCount = (book) => {
     const deleteBookBtn = document.createElement('button');
     deleteBookBtn.setAttribute('class', 'btn btn-danger w-25 mb-4');
     deleteBookBtn.innerText = 'CANCELLA BOOK';
+
+
 
     deleteBookBtn.addEventListener('click', () => {
         deleteItemFromBook(book);
@@ -148,7 +157,8 @@ const generateBooks = async (book) => {
 const addBooks = (book) => {
     arrayBooks.push(book);
     updateCountBook();
-    console.log(arrayBooks);
+    updateTotalPrice();
+  
 }
 cardButton.addEventListener('click', showCart);
 dialogBtnClose.addEventListener('click', hideCart);
