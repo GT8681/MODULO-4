@@ -6,6 +6,8 @@ const dialogBtnClose = document.querySelector('.dialog-btn-close');
 const bookItemCount = document.querySelector('.book-item-count');
 const totalPriceContainer = document.querySelector('.totalPrice');
 const clearBtn = document.querySelector('.clearBtn');
+const inputSerach = document.getElementById('searchInput');
+const searchInput = document.querySelector('.buttonSearchLibro');
 
 let arrayBooks = [];
 
@@ -26,8 +28,8 @@ const hideCart = () => {
     cardDialog.close();
 }
 
-const updateTotalPrice = () =>{
-    totalPrice = arrayBooks.reduce((sum,book)=> sum + parseFloat(book.price),0);
+const updateTotalPrice = () => {
+    totalPrice = arrayBooks.reduce((sum, book) => sum + parseFloat(book.price), 0);
     totalPriceContainer.innerText = `Totale prezzo Euro ${totalPrice.toFixed(2)}`
 }
 
@@ -75,10 +77,6 @@ const generateBookItemCount = (book) => {
     cardContent.appendChild(conteinerBook);
 };
 
-
-
-
-
 const mapCardBooks = () => {
     if (arrayBooks.length === 0) {
         return
@@ -90,9 +88,6 @@ const mapCardBooks = () => {
 
     })
 }
-
-
-
 
 const getBooks = async () => {
     try {
@@ -106,10 +101,13 @@ const getBooks = async () => {
 
 const generateBooks = async (book) => {
     const wrapper = document.createElement('div');
-    wrapper.setAttribute('class','col-lg-10 col-md- w-25');
+    wrapper.setAttribute('class', 'col-lg-10 col-md- w-25');
 
     const container = document.createElement('div');
     container.setAttribute('class', 'card col-lg-10 col-md-6 m-3 p-3 ');
+    container.addEventListener('click', () => {
+        window.location.href = `./datails.html?asin=${book.asin}`
+    })
 
     const title = document.createElement('h3');
     title.innerText = book.title;
@@ -147,10 +145,10 @@ const generateBooks = async (book) => {
 
 
 
-    container.append(title, img, containerPrice, pPrice, price, containerCategory, pCategory, category, addButton);
+    container.append(title, img, containerPrice, pPrice, price, containerCategory, pCategory, category);
     containerPrice.append(pPrice, price);
     containerCategory.append(pCategory, category);
-    wrapper.append(container,);
+    wrapper.append(container, addButton);
     cardContainer.appendChild(wrapper);
 
 }
@@ -159,12 +157,12 @@ const addBooks = (book) => {
     arrayBooks.push(book);
     updateCountBook();
     updateTotalPrice();
-  
+
 }
 cardButton.addEventListener('click', showCart);
 dialogBtnClose.addEventListener('click', hideCart);
 
-clearBtn.addEventListener('click', () =>{
+clearBtn.addEventListener('click', () => {
     arrayBooks = [];
     updateCountBook();
     cardContent.innerHTML = "";
@@ -172,6 +170,38 @@ clearBtn.addEventListener('click', () =>{
 
 })
 
+
+searchInput.addEventListener('click', async (event) => {
+    event.preventDefault();
+    const value = inputSerach.value;
+    const books = await getBooks();
+    if (value.length < 3) {
+        alert ("MA CE STA FA..... devi mettere almeno 3 CARATTERI");
+
+    }
+
+
+    const filteredBooks = books.filter(book => book.title.toLowerCase().includes(value.toLowerCase()));
+    cardContainer.innerHTML = "";
+    filteredBooks.forEach(book => {
+        generateBooks(book);
+
+    });
+
+})
+
+inputSerach.addEventListener('input', () => {
+
+    if (inputSerach.value < 3 ) {
+        searchInput.setAttribute('disabled','true');
+        
+    }
+
+    if (inputSerach.value === "") {
+        getBooks()
+            .then(res => res.map(book => generateBooks(book)))
+    }
+})
 
 
 getBooks()
