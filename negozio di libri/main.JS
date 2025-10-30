@@ -6,7 +6,7 @@ const dialogBtnClose = document.querySelector('.dialog-btn-close');
 const bookItemCount = document.querySelector('.book-item-count');
 const totalPriceContainer = document.querySelector('.totalPrice');
 const clearBtn = document.querySelector('.clearBtn');
-const inputSerach = document.getElementById('searchInput');
+const inputSearch = document.getElementById('searchInput');
 const searchInput = document.querySelector('.buttonSearchLibro');
 
 let arrayBooks = [];
@@ -173,7 +173,7 @@ clearBtn.addEventListener('click', () => {
 
 searchInput.addEventListener('click', async (event) => {
     event.preventDefault();
-    const value = inputSerach.value;
+    const value = inputSearch.value;
     const books = await getBooks();
     if (value.length < 3) {
         alert ("MA CE STA FA..... devi mettere almeno 3 CARATTERI");
@@ -189,21 +189,21 @@ searchInput.addEventListener('click', async (event) => {
     });
 
 })
+/*
+inputSearch.addEventListener('input', () => {
 
-inputSerach.addEventListener('input', () => {
-
-    if (inputSerach.value < 3 ) {
+    if (inputSearch.value < 3 ) {
         searchInput.setAttribute('disabled','true');
         
     }
 
-    if (inputSerach.value === "") {
+    if (inputSearch.value === "") {
         getBooks()
             .then(res => res.map(book => generateBooks(book)))
     }
 })
 
-
+*/
 getBooks()
     .then(res => res.map(book => generateBooks(book)))
 

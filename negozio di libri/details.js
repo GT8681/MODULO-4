@@ -1,4 +1,4 @@
-const bookDetailsContainer = document.querySelector('book-details-container');
+const bookDetailsContainer = document.querySelector('.book-details-container');
 
 const params = new URLSearchParams(window.location.search);
 
@@ -33,12 +33,12 @@ const createBookDetails = (book) =>{
     
 
     const detailsTitle = document.createElement("h2");
-    detailsTitle.classList("class","text-dark");
+    detailsTitle.classList.add("class","text-dark");
     detailsTitle.innerText = book.title;
     detailsBookContainer.appendChild(detailsTitle);
 
     const detailImg = document.createElement("img");
-    detailImg .setAttribute("class","w-100 object-fit-cover");
+    detailImg .setAttribute("class","w-25 object-fit-cover");
     detailImg.src = book.img;
     detailsBookContainer.appendChild(detailImg);
 
